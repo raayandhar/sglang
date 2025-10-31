@@ -59,7 +59,6 @@ from sglang.srt.utils.common import (
     parse_connector_type,
     xpu_has_xmx_support,
 )
-from sglang.srt.utils.hf_transformers_utils import check_gguf_file, get_config
 from sglang.utils import is_in_ci
 
 logger = logging.getLogger(__name__)
@@ -1595,6 +1594,8 @@ class ServerArgs:
                 )
 
     def _handle_load_format(self):
+        from sglang.srt.utils.hf_transformers_utils import check_gguf_file
+
         if (
             self.load_format == "auto" or self.load_format == "gguf"
         ) and check_gguf_file(self.model_path):
@@ -3528,6 +3529,8 @@ class ServerArgs:
             return f"http://{self.host}:{self.port}"
 
     def get_hf_config(self):
+        from sglang.srt.utils.hf_transformers_utils import get_config
+
         kwargs = {}
         hf_config = get_config(
             self.model_path,

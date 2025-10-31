@@ -35,7 +35,6 @@ from torch.cuda import Stream as CudaStream
 from torch.cuda import StreamContext as CudaStreamContext
 from torch.distributed import barrier
 
-from sglang.srt.configs.model_config import ModelConfig
 from sglang.srt.constrained.base_grammar_backend import (
     INVALID_GRAMMAR_OBJ,
     create_grammar_backend,
@@ -282,6 +281,9 @@ class Scheduler(
         )
 
         # Init model config
+        # Lazy import to defer transformers loading
+        from sglang.srt.configs.model_config import ModelConfig
+
         self.model_config = ModelConfig.from_server_args(server_args)
 
         # Init inter-process communication

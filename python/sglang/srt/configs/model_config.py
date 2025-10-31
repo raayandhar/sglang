@@ -12,28 +12,29 @@
 # limitations under the License.
 # ==============================================================================
 
+from __future__ import annotations
+
 import json
 import logging
 import math
 import os
 from enum import Enum, IntEnum, auto
-from typing import Any, List, Optional, Set, Union
+from typing import TYPE_CHECKING, Any, List, Optional, Set, Union
 
 import torch
-from transformers import PretrainedConfig
 
 from sglang.srt.environ import envs
 from sglang.srt.layers.quantization import QUANTIZATION_METHODS
 from sglang.srt.server_args import ServerArgs
 from sglang.srt.utils import is_hip, retry
 from sglang.srt.utils.hf_transformers_utils import (
-    get_config,
     get_context_length,
-    get_generation_config,
-    get_hf_text_config,
     get_sparse_attention_config,
 )
 from sglang.utils import is_in_ci
+
+if TYPE_CHECKING:
+    from transformers import PretrainedConfig
 
 logger = logging.getLogger(__name__)
 
@@ -98,6 +99,12 @@ class ModelConfig:
         sampling_defaults: str = "openai",
         quantize_and_serve: bool = False,
     ) -> None:
+        from sglang.srt.utils.hf_transformers_utils import (
+            get_config,
+            get_generation_config,
+            get_hf_text_config,
+        )
+
         # Parse args
         self.model_path = model_path
         self.revision = revision
