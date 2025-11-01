@@ -30,7 +30,10 @@ from sglang.srt.utils import (
 )
 
 if TYPE_CHECKING:
-    from sglang.srt.layers.quantization.base_config import QuantizationConfig, QuantizeMethodBase
+    from sglang.srt.layers.quantization.base_config import (
+        QuantizationConfig,
+        QuantizeMethodBase,
+    )
 
 DEFAULT_VOCAB_PADDING_SIZE = 64
 
@@ -254,7 +257,9 @@ class VocabParallelEmbedding(torch.nn.Module):
         )
         self.embedding_dim = embedding_dim
 
-        from sglang.srt.layers.quantization.base_config import method_has_implemented_embedding
+        from sglang.srt.layers.quantization.base_config import (
+            method_has_implemented_embedding,
+        )
         from sglang.srt.layers.quantization.unquant import UnquantizedEmbeddingMethod
 
         quant_method = None

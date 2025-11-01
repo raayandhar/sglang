@@ -38,6 +38,7 @@ logger = logging.getLogger(__name__)
 if TYPE_CHECKING:
     from transformers import PretrainedConfig
 
+
 class AttentionArch(IntEnum):
     MLA = auto()
     MHA = auto()
