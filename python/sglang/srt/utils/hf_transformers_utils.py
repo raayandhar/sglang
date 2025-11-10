@@ -50,6 +50,7 @@ def _register_custom_configs():
         DotsVLMConfig,
         ExaoneConfig,
         FalconH1Config,
+        JetNemotronConfig,
         KimiLinearConfig,
         KimiVLConfig,
         LongcatFlashConfig,
@@ -58,7 +59,6 @@ def _register_custom_configs():
         Olmo3Config,
         Qwen3NextConfig,
         Step3VLConfig,
-        JetNemotronConfig,
     )
     from sglang.srt.configs.deepseek_ocr import DeepseekVLV2Config
     from sglang.srt.configs.internvl import InternVLChatConfig
