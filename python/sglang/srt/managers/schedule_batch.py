@@ -1,7 +1,3 @@
-from __future__ import annotations
-
-from sglang.srt.model_executor.forward_batch_info import ForwardBatch
-
 # Copyright 2023-2024 SGLang Team
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,6 +28,8 @@ ScheduleBatch -> ModelWorkerBatch -> ForwardBatch
 
 TODO(lmzheng): ModelWorkerBatch seems a bit redundant and we consider removing it in the future.
 """
+
+from __future__ import annotations
 
 import copy
 import dataclasses
