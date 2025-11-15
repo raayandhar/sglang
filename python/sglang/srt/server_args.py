@@ -22,14 +22,11 @@ import logging
 import os
 import random
 import tempfile
-from typing import Dict, List, Literal, Optional, Union
+from typing import TYPE_CHECKING, Dict, List, Literal, Optional, Union
 
 import orjson
 
 from sglang.srt.environ import ToolStrictLevel, envs
-from sglang.srt.function_call.function_call_parser import FunctionCallParser
-from sglang.srt.lora.lora_registry import LoRARef
-from sglang.srt.parser.reasoning_parser import ReasoningParser
 from sglang.srt.utils.common import (
     LORA_TARGET_ALL_MODULES,
     SUPPORTED_LORA_TARGET_MODULES,
@@ -61,6 +58,9 @@ from sglang.srt.utils.common import (
     xpu_has_xmx_support,
 )
 from sglang.utils import is_in_ci
+
+if TYPE_CHECKING:
+    from sglang.srt.lora.lora_registry import LoRARef
 
 logger = logging.getLogger(__name__)
 
@@ -1887,6 +1887,8 @@ class ServerArgs:
 
     @staticmethod
     def add_cli_args(parser: argparse.ArgumentParser):
+        from sglang.srt.function_call.function_call_parser import FunctionCallParser
+        from sglang.srt.parser.reasoning_parser import ReasoningParser
 
         # Model and tokenizer
         parser.add_argument(
@@ -3839,6 +3841,8 @@ class ServerArgs:
         ), "schedule_conservativeness must be non-negative"
 
     def check_lora_server_args(self):
+        from sglang.srt.lora.lora_registry import LoRARef
+
         assert self.max_loras_per_batch > 0, "max_loras_per_batch must be positive"
 
         # Enable LoRA if any LoRA paths are provided for backward compatibility.
